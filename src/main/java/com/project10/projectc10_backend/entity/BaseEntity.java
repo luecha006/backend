@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public abstract class BaseEntity {
     //primary key เป็น id ชนิด int และสร้าง auto
     @Id
-//    @JsonIgnore //ห้ามส่งกลับไป
+    @JsonIgnore //ห้ามส่งกลับไป
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 }

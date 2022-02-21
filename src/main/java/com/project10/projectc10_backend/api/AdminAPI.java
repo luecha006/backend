@@ -1,13 +1,10 @@
 package com.project10.projectc10_backend.api;
 
 import com.project10.projectc10_backend.businass.AdminBusinass;
-import com.project10.projectc10_backend.entity.Admin;
 import com.project10.projectc10_backend.exception.AdminException;
 import com.project10.projectc10_backend.model.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -20,7 +17,7 @@ public class AdminAPI {
     public AdminAPI(AdminBusinass businass) {
         this.businass = businass;
     }
-
+//-------------------------
     @PostMapping("/register") //function ลงทะเบียน ,add Admin --> ผ่าน
     public ResponseEntity<MRegisterResponse> register(@RequestBody MRegisterRequest request) throws AdminException {
         //ResponseEntity เป็นการห่อ object โดยถ้าการประมวลผลสำเร็จมันจะ return http กลับเป็น 200
@@ -30,6 +27,11 @@ public class AdminAPI {
         return ResponseEntity.ok(response);
     }
 
+//    @PostMapping("/register") //function ลงทะเบียน ,add Admin --> ผ่าน
+//    public ResponseEntity<MRegisterRequest> register(@RequestBody MRegisterRequest request) throws AdminException {
+//        return ResponseEntity.ok(request);
+//    }
+//-------------------------
     @PostMapping("/login") //--> ผ่าน
     public ResponseEntity<MLoginResponse> login(@RequestBody MLoginRequest request) throws AdminException { //function login
         MLoginResponse response = businass.login(request);

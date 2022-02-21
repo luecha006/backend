@@ -1,2 +1,109 @@
-package com.project10.projectc10_backend.service;public class MaskPatternService {
+package com.project10.projectc10_backend.service;
+
+import com.project10.projectc10_backend.ConvertDateTime.ConvertStringToLocalDateTime;
+import com.project10.projectc10_backend.entity.HistoryScanner;
+import com.project10.projectc10_backend.exception.BaseException;
+import com.project10.projectc10_backend.exception.MaskPatternException;
+import com.project10.projectc10_backend.repository.MaskPatternRepository;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+
+@Service
+public class MaskPatternService {
+
+    private final ConvertStringToLocalDateTime convertDateTime = new ConvertStringToLocalDateTime();
+    private final MaskPatternRepository repository;
+
+    public MaskPatternService(MaskPatternRepository repository) {
+        this.repository = repository;
+    }
+
+    public HistoryScanner create(String date, String time, String maskPattern, float temperature) throws BaseException {
+
+        if (Objects.isNull(maskPattern)) {
+            throw MaskPatternException.MaskPatternNull();
+        }
+
+        if (Objects.isNull(temperature)) {
+            throw MaskPatternException.TemperatureNull();
+        }
+
+        HistoryScanner entity = new HistoryScanner();
+
+        entity.setDate(convertDateTime.ConvertStringToLocalDate(date));
+        entity.setTime(convertDateTime.ConvertStringToLocalTime(time));
+        entity.setMaskpattern(maskPattern);
+        entity.setTemperature(temperature);
+
+        return repository.save(entity);
+    }
+
+
+    public List<HistoryScanner> fetchAllMaskPattern() {
+        List<HistoryScanner> allPattern = new ArrayList<>();
+        Iterable<HistoryScanner> maskPatterns = repository.findAll();
+
+        for (HistoryScanner historyScanner : maskPatterns) {
+            allPattern.add(historyScanner);
+        }
+        return allPattern;
+    }
+
+    public Iterable<HistoryScanner> selectWithMaskPattern(String pattern, String s_value, String e_value) throws MaskPatternException {
+        Iterable<HistoryScanner> maskPatterns = new HashSet<>();
+
+        if (Objects.isNull(pattern)) {
+            throw MaskPatternException.PatternNull();
+        }
+
+        if (Objects.isNull(s_value)) {
+            throw MaskPatternException.StartTimeNull();
+        }
+
+        if (Objects.isNull(e_value)) {
+            throw MaskPatternException.EndTimeNull();
+        }
+
+        // รูปแบบที่1 (0) จะส่งวันที่ปัจจุบันมาด้วยเพื่อใช้ Query
+        if (pattern.equals("0")) {  //ผ่าน
+
+            System.out.println("pattern " + pattern);
+
+            // สร้างวันที่ปัจจุบันให้ไป query
+            LocalDate date = LocalDate.now();
+            LocalTime s_time = convertDateTime.ConvertStringToLocalTime(s_value);
+            LocalTime e_time = convertDateTime.ConvertStringToLocalTime(e_value);
+
+//            System.out.println("date " + date);
+//            System.out.println("s_time " + s_time);
+//            System.out.println("e_time " + e_time);
+
+            maskPatterns = repository.findByHomepageCurrentDay(s_time, e_time, date);
+
+            System.out.println("allPattern " + maskPatterns);
+
+        } else if (pattern.equals("1") || pattern.equals("2")) {
+
+            System.out.println("pattern " + pattern);
+
+            LocalDate s_date = convertDateTime.ConvertStringToLocalDate(s_value);
+            LocalDate e_date = convertDateTime.ConvertStringToLocalDate(e_value);
+
+//            System.out.println("s_date " + s_date);
+//            System.out.println("e_date " + e_date);
+
+            maskPatterns = repository.findByHomepageWeeklyANDMonthly(s_date, e_date);
+
+            System.out.println("maskPatterns " + maskPatterns);
+
+        }
+
+        return maskPatterns;
+    }
 }

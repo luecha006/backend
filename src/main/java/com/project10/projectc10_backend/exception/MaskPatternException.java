@@ -13,4 +13,25 @@ public class MaskPatternException extends BaseException {
     public static MaskPatternException TemperatureNull(){
         return new MaskPatternException("write.temperature.null");
     }
+
+    public static MaskPatternException PatternNull(){
+        return new MaskPatternException("pattern.null");
+    }
+
+    public static MaskPatternException DateNull(){
+        return new MaskPatternException("date.null");
+    }
+
+    public static MaskPatternException StartTimeNull(){
+        return new MaskPatternException("s_time.null");
+    }
+
+    public static MaskPatternException EndTimeNull(){
+        return new MaskPatternException("e_time.null");
+    }
+
+    public static MaskPatternException selectWithMaskPatternNull(){
+        return new MaskPatternException("selectWithMaskPattern.historyScanners.null");
+    }
+
 }

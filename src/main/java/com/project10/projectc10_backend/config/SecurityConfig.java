@@ -22,7 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/admin/delete",
             "/admin/fetchAllAdmin",
             "/facemask/writemaskpattern",
-            "/facemask/fetchAllMaskPattern"
+            "/facemask/fetchAllMaskPattern",
+            "/facemask/selectWithMaskPattern"
     };
 
 

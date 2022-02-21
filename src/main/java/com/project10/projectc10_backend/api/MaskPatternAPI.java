@@ -1,14 +1,14 @@
 package com.project10.projectc10_backend.api;
 
 import com.project10.projectc10_backend.businass.MaskPatternBusinass;
+import com.project10.projectc10_backend.entity.HistoryScanner;
 import com.project10.projectc10_backend.exception.BaseException;
-import com.project10.projectc10_backend.model.MFetchAllPatternResponse;
+import com.project10.projectc10_backend.exception.MaskPatternException;
 import com.project10.projectc10_backend.model.MMaskPatternRequest;
 import com.project10.projectc10_backend.model.MMaskPatternResponse;
+import com.project10.projectc10_backend.model.MTestMaskPatternRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/facemask")
@@ -21,7 +21,7 @@ public class MaskPatternAPI {
     }
 
     @PostMapping
-    @RequestMapping("/writemaskpattern")//ผ่าน
+    @RequestMapping("/writemaskpattern")//บันทึกข้อมูบการสแกนลง database --> ผ่าน
     public ResponseEntity<MMaskPatternResponse> WriteMaskPattern(@RequestBody MMaskPatternRequest request) throws BaseException {
 
         MMaskPatternResponse response = businass.WriteMaskPattern(request);
@@ -30,9 +30,14 @@ public class MaskPatternAPI {
     }
 
     @GetMapping
-    @RequestMapping("/fetchAllMaskPattern")//ผ่าน
-    public ResponseEntity<List<MFetchAllPatternResponse>> fetchAllMaskPattern() throws BaseException{
+    @RequestMapping("/fetchAllMaskPattern")// เรียกดูข้อมูลการสแกนทั้งหมด --> ผ่าน
+    public ResponseEntity<Iterable<HistoryScanner>> fetchAllMaskPattern() throws BaseException {
+        return ResponseEntity.ok(businass.fetchAllMaskPattern());
+    }
 
-       return ResponseEntity.ok(businass.fetchAllMaskPattern());
+    @PostMapping
+    @RequestMapping("/selectWithMaskPattern") //เลือกข้อมูลจากหน้า homepage --> ผ่าน
+    public Iterable<HistoryScanner> selectWithMaskPattern(@RequestBody MTestMaskPatternRequest request) throws MaskPatternException {
+        return businass.selectWithMaskPattern(request);
     }
 }
