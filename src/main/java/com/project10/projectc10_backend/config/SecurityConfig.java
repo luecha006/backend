@@ -8,9 +8,22 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final String[] PUBLIC = {
+            "/admin/register",
+            "/admin/login",
+            "/admin/changepassword",
+            "/admin/delete",
+            "/admin/fetchAllAdmin",
+            "/facemask/writemaskpattern",
+            "/facemask/fetchAllMaskPattern"
+    };
 
 
     @Bean   // type for PasswordEncoder
@@ -28,7 +41,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().disable().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests().
-                antMatchers("/admin/register", "/admin/login", "/admin/changepassword","/admin/delete","/admin/fetchAllAdmin")
+                antMatchers(PUBLIC)
                 .anonymous().anyRequest().authenticated();
+    }
+
+    @Bean
+    public CorsFilter corsFilter(){
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("http://localhost:4200");
+//        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("DELETE");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
     }
 }

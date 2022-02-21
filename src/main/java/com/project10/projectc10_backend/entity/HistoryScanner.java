@@ -1,11 +1,14 @@
 package com.project10.projectc10_backend.entity;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity(name = "history_scanner")
+@Data
 public class HistoryScanner extends BaseEntity {
 
     @Column(nullable = false)
@@ -15,10 +18,9 @@ public class HistoryScanner extends BaseEntity {
     private LocalTime time;
 
     @Column(nullable = false)
-    private Integer mask_pattern;
+    private String maskpattern;
 
     @Column(nullable = false)
-    private Float temperature;
-
+    private float temperature;
 
 }

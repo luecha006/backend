@@ -24,7 +24,7 @@ public class ErrorAdviser {
     @Data
     public static class ErrorResponse {
 
-        //เมื่อมีการสร้าง opject ของ class นี้จะมีการ set เวลาทันที เพื่อให้รู้ว่า error ตอนไหน
+        //เมื่อมีการสร้าง object ของ class นี้จะมีการ set เวลาทันที เพื่อให้รู้ว่า error ตอนไหน
         private LocalDateTime timestimp = LocalDateTime.now();
 
         private int status;

@@ -7,6 +7,8 @@ import com.project10.projectc10_backend.model.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import java.util.List;
 
 @RestController
@@ -29,8 +31,8 @@ public class AdminAPI {
     }
 
     @PostMapping("/login") //--> ผ่าน
-    public ResponseEntity<Boolean> login(@RequestBody MLoginRequest request) throws AdminException { //function login
-        boolean response = businass.login(request);
+    public ResponseEntity<MLoginResponse> login(@RequestBody MLoginRequest request) throws AdminException { //function login
+        MLoginResponse response = businass.login(request);
         return ResponseEntity.ok(response);
     }
 
@@ -53,4 +55,5 @@ public class AdminAPI {
 
         return businass.fetchAll();
     }
+
 }

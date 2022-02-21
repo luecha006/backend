@@ -39,7 +39,7 @@ public class AdminBusinass {
         return token; // ถ้าผ่านส่ง true กลับไป
     }
 
-    public boolean login(MLoginRequest request) throws AdminException {
+    public MLoginResponse login(MLoginRequest request) throws AdminException {
 
         //verifi database ตรวจสอบใน database
         Optional<Admin> opt = adminService.findByUsername(request.getUsername()); //ส่ง username ไปให้ function findByUsername
@@ -57,8 +57,8 @@ public class AdminBusinass {
             //throw login fail password not incorrect
             throw AdminException.loginFailPasswordIncorrect();
         }
-
-        return true; // password ตรงกันส่งค่า true กลับไป
+        // password ตรงกันส่งค่า true กลับไป
+        return adminMapper.toMLoginResponse(admin);
 
     }
 
@@ -76,6 +76,7 @@ public class AdminBusinass {
 //        if (Objects.isNull(request.getEmail())) {
 //            throw UserException.emailNull();
 //        }
+
     }
 
     public List<MFetchAllResponse> fetchAll() throws AdminException {
@@ -86,7 +87,7 @@ public class AdminBusinass {
             allAdmin.add((MFetchAllResponse) adminMapper.toMFetchAllResponse(admin));
         }
 
-        if (allAdmin.isEmpty()){
+        if (allAdmin.isEmpty()) {
             return null;
 //            throw AdminException.fetchAllAdmin();
         } else {
