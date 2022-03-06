@@ -11,10 +11,13 @@ import java.util.Optional;
 public interface MaskPatternRepository extends CrudRepository<HistoryScanner, Integer> {
 
     @Query(value = "select * from history_scanner where (time between ?1 AND ?2) AND (date = ?3)", nativeQuery = true)
-    Iterable<HistoryScanner> findByHomepageCurrentDay(LocalTime s_value, LocalTime e_value, LocalDate date);
+    Iterable<HistoryScanner> selectHomepageCurrentDay(LocalTime s_value, LocalTime e_value, LocalDate date);
 
     @Query(value = "select * from history_scanner where date between ?1 AND ?2", nativeQuery = true)
     Iterable<HistoryScanner> findByHomepageWeeklyANDMonthly(LocalDate s_date, LocalDate e_date);
+
+    @Query(value = "select * from history_scanner where date = ?1", nativeQuery = true)
+    Iterable<HistoryScanner> selectHomePage(LocalDate currentDay);
 
 
     Optional<HistoryScanner> findByTemperature(float f);

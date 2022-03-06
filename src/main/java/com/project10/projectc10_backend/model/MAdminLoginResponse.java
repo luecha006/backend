@@ -3,8 +3,8 @@ package com.project10.projectc10_backend.model;
 import lombok.Data;
 
 @Data
-public class MLoginRequest {
+public class MAdminLoginResponse {
 
     private String username;
-    private String password;
+    private String type_admin;
 }

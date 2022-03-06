@@ -11,5 +11,4 @@ public class MFetchAllPatternResponse {
     private LocalTime time;
     private String maskpattern;
     private float temperature;
-
 }

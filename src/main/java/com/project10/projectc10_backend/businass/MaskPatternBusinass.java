@@ -5,9 +5,9 @@ import com.project10.projectc10_backend.exception.BaseException;
 import com.project10.projectc10_backend.exception.MaskPatternException;
 import com.project10.projectc10_backend.mapper.MaskPatternMapper;
 import com.project10.projectc10_backend.model.MFetchAllPatternResponse;
-import com.project10.projectc10_backend.model.MMaskPatternRequest;
+import com.project10.projectc10_backend.model.MHomePageSelectMaskPatternRequest;
+import com.project10.projectc10_backend.model.MWriteMaskPatternRequest;
 import com.project10.projectc10_backend.model.MMaskPatternResponse;
-import com.project10.projectc10_backend.model.MTestMaskPatternRequest;
 import com.project10.projectc10_backend.service.MaskPatternService;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class MaskPatternBusinass {
         this.maskMapper = maskMapper;
     }
 
-    public MMaskPatternResponse WriteMaskPattern(MMaskPatternRequest request) throws BaseException {
+    public MMaskPatternResponse WriteMaskPattern(MWriteMaskPatternRequest request) throws BaseException {
 
         HistoryScanner historyScanner = maskPatternService.create(request.getDate(), request.getTime(), request.getMaskpattern(), request.getTemperature());
 
@@ -36,7 +36,7 @@ public class MaskPatternBusinass {
         return maskPatternService.fetchAllMaskPattern();
     }
 //--------------------------------
-//    public List<MFetchAllPatternResponse> selectWithMaskPattern(MTestMaskPatternRequest pattern) {
+//    public List<MFetchAllPatternResponse> selectWithMaskPattern(MHomePageSelectMaskPatternRequest pattern) {
 //        List<MFetchAllPatternResponse> allPattern = new ArrayList<>();
 //
 //        List<HistoryScanner> historyScanners = maskPatternService.selectWithMaskPattern(pattern.getE_time());
@@ -57,7 +57,7 @@ public class MaskPatternBusinass {
 
 
     // ไม่ทำการ mapper ส่งค่าเป็น historyscanner กลับเลย
-    public Iterable<HistoryScanner> selectWithMaskPattern(MTestMaskPatternRequest pattern) throws MaskPatternException {
+    public Iterable<HistoryScanner> selectWithMaskPattern(MHomePageSelectMaskPatternRequest pattern) throws MaskPatternException {
         List<MFetchAllPatternResponse> allPattern = new ArrayList<>();
 
         Iterable<HistoryScanner> historyScanners = maskPatternService.selectWithMaskPattern(
@@ -67,5 +67,10 @@ public class MaskPatternBusinass {
 
         return historyScanners;
 
+    }
+
+    public Iterable<HistoryScanner> selectHomePageDateCurrent(){
+        Iterable<HistoryScanner> historyScanners = maskPatternService.selectHomePageDateCurrent();
+        return historyScanners;
     }
 }

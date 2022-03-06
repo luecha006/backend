@@ -73,37 +73,27 @@ public class MaskPatternService {
         // รูปแบบที่1 (0) จะส่งวันที่ปัจจุบันมาด้วยเพื่อใช้ Query
         if (pattern.equals("0")) {  //ผ่าน
 
-            System.out.println("pattern " + pattern);
-
             // สร้างวันที่ปัจจุบันให้ไป query
             LocalDate date = LocalDate.now();
             LocalTime s_time = convertDateTime.ConvertStringToLocalTime(s_value);
             LocalTime e_time = convertDateTime.ConvertStringToLocalTime(e_value);
 
-//            System.out.println("date " + date);
-//            System.out.println("s_time " + s_time);
-//            System.out.println("e_time " + e_time);
-
-            maskPatterns = repository.findByHomepageCurrentDay(s_time, e_time, date);
-
-            System.out.println("allPattern " + maskPatterns);
+            maskPatterns = repository.selectHomepageCurrentDay(s_time, e_time, date);
 
         } else if (pattern.equals("1") || pattern.equals("2")) {
-
-            System.out.println("pattern " + pattern);
-
             LocalDate s_date = convertDateTime.ConvertStringToLocalDate(s_value);
             LocalDate e_date = convertDateTime.ConvertStringToLocalDate(e_value);
 
-//            System.out.println("s_date " + s_date);
-//            System.out.println("e_date " + e_date);
-
             maskPatterns = repository.findByHomepageWeeklyANDMonthly(s_date, e_date);
-
-            System.out.println("maskPatterns " + maskPatterns);
 
         }
 
+        return maskPatterns;
+    }
+
+    public Iterable<HistoryScanner> selectHomePageDateCurrent(){
+        LocalDate currentDay = LocalDate.now();
+        Iterable<HistoryScanner> maskPatterns = repository.selectHomePage(currentDay);
         return maskPatterns;
     }
 }

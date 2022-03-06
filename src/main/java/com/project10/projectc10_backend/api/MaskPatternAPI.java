@@ -4,9 +4,9 @@ import com.project10.projectc10_backend.businass.MaskPatternBusinass;
 import com.project10.projectc10_backend.entity.HistoryScanner;
 import com.project10.projectc10_backend.exception.BaseException;
 import com.project10.projectc10_backend.exception.MaskPatternException;
-import com.project10.projectc10_backend.model.MMaskPatternRequest;
+import com.project10.projectc10_backend.model.MHomePageSelectMaskPatternRequest;
+import com.project10.projectc10_backend.model.MWriteMaskPatternRequest;
 import com.project10.projectc10_backend.model.MMaskPatternResponse;
-import com.project10.projectc10_backend.model.MTestMaskPatternRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +22,7 @@ public class MaskPatternAPI {
 
     @PostMapping
     @RequestMapping("/writemaskpattern")//บันทึกข้อมูบการสแกนลง database --> ผ่าน
-    public ResponseEntity<MMaskPatternResponse> WriteMaskPattern(@RequestBody MMaskPatternRequest request) throws BaseException {
+    public ResponseEntity<MMaskPatternResponse> WriteMaskPattern(@RequestBody MWriteMaskPatternRequest request) throws BaseException {
 
         MMaskPatternResponse response = businass.WriteMaskPattern(request);
 
@@ -37,7 +37,19 @@ public class MaskPatternAPI {
 
     @PostMapping
     @RequestMapping("/selectWithMaskPattern") //เลือกข้อมูลจากหน้า homepage --> ผ่าน
-    public Iterable<HistoryScanner> selectWithMaskPattern(@RequestBody MTestMaskPatternRequest request) throws MaskPatternException {
+    public Iterable<HistoryScanner> selectWithMaskPattern(@RequestBody MHomePageSelectMaskPatternRequest request) throws MaskPatternException {
         return businass.selectWithMaskPattern(request);
+    }
+
+    @GetMapping
+    @RequestMapping("/selectHomePageDateCurrent")
+    public Iterable<HistoryScanner> selectHomePageDateCurrent(){
+        return businass.selectHomePageDateCurrent();
+    }
+
+    @PostMapping
+    @RequestMapping("/selectHomePageMonthly")
+    public void selectSearchInformationPage(){
+
     }
 }

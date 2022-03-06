@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Projectc10BackendApplication" type="Application" factoryName="Application" nameIsGenerated="true">
     <option name="MAIN_CLASS_NAME" value="com.project10.projectc10_backend.Projectc10BackendApplication" />
-    <module name="projectc-backend" />
+    <module name="projectc10_backend" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.project10.projectc10_backend.mapper.*" />

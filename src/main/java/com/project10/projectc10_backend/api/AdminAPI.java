@@ -10,45 +10,40 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin") //ถ้าอยู่บนหัว class แสดงว่าทุกๆ api จะต้องขึ้นต้นด้วย path นี้
-public class AdminAPI {
+class AdminAPI {
 
-    private final AdminBusinass businass; //สร้าง object ของ class TastBusinass
+    private final AdminBusinass businass; //สร้าง object ของ class TestBusinass
 
     public AdminAPI(AdminBusinass businass) {
         this.businass = businass;
     }
-//-------------------------
+
     @PostMapping("/register") //function ลงทะเบียน ,add Admin --> ผ่าน
-    public ResponseEntity<MRegisterResponse> register(@RequestBody MRegisterRequest request) throws AdminException {
+    public ResponseEntity<MRegisterResponse> register(@RequestBody MAdminRegisterRequest request) throws AdminException {
         //ResponseEntity เป็นการห่อ object โดยถ้าการประมวลผลสำเร็จมันจะ return http กลับเป็น 200
-        //ลงทะเบียนโดยมีข้อมูล โครงสร้างตาม Class MRegisterRequest
+        //ลงทะเบียนโดยมีข้อมูล โครงสร้างตาม Class MAdminRegisterRequest
 
         MRegisterResponse response = businass.register(request);
         return ResponseEntity.ok(response);
     }
 
-//    @PostMapping("/register") //function ลงทะเบียน ,add Admin --> ผ่าน
-//    public ResponseEntity<MRegisterRequest> register(@RequestBody MRegisterRequest request) throws AdminException {
-//        return ResponseEntity.ok(request);
-//    }
-//-------------------------
     @PostMapping("/login") //--> ผ่าน
-    public ResponseEntity<MLoginResponse> login(@RequestBody MLoginRequest request) throws AdminException { //function login
-        MLoginResponse response = businass.login(request);
+    public ResponseEntity<MAdminLoginResponse> login(@RequestBody MAdminLoginRequest request) throws AdminException { //function login
+        MAdminLoginResponse response = businass.login(request);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/changepassword") //--> ผ่าน
-    public ResponseEntity<Boolean> changepassword(@RequestBody MChangePassword request) throws AdminException {
+    public ResponseEntity<Boolean> changepassword(@RequestBody MAdminChangePasswordRequest request) throws AdminException {
         boolean response = businass.chasngePassword(request);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/delete") //--> ผ่าน
-    public ResponseEntity<Boolean> deleteAdmin(@RequestBody MDeleteRequest request) throws AdminException {
-        boolean respons = businass.delete(request);
+    public ResponseEntity<Boolean> deleteAdmin(@RequestBody MAdminDeleteRequest request) throws AdminException {
+        boolean response = businass.delete(request);
 
-        return ResponseEntity.ok(respons);
+        return ResponseEntity.ok(response);
     }
 
     // ดึงข้อมูล

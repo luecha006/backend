@@ -22,13 +22,13 @@ public class AdminBusinass {
         this.adminMapper = adminMapper;
     }
 
-    public boolean chasngePassword(MChangePassword request) throws AdminException {
+    public boolean chasngePassword(MAdminChangePasswordRequest request) throws AdminException {
         boolean token = adminService.updatePassword(request.getUsername(), request.getPassword());
 
         return token;
     }
 
-    public boolean delete(MDeleteRequest request) throws AdminException { //delect of username --> ผ่าน
+    public boolean delete(MAdminDeleteRequest request) throws AdminException { //delect of username --> ผ่าน
         Optional<Admin> opt = adminService.findByUsername(request.getUsername());
         if (opt.isEmpty()) {
             throw AdminException.notFound();
@@ -39,7 +39,7 @@ public class AdminBusinass {
         return token; // ถ้าผ่านส่ง true กลับไป
     }
 
-    public MLoginResponse login(MLoginRequest request) throws AdminException {
+    public MAdminLoginResponse login(MAdminLoginRequest request) throws AdminException {
 
         //verifi database ตรวจสอบใน database
         Optional<Admin> opt = adminService.findByUsername(request.getUsername()); //ส่ง username ไปให้ function findByUsername
@@ -62,7 +62,7 @@ public class AdminBusinass {
 
     }
 
-    public MRegisterResponse register(MRegisterRequest request) throws AdminException {
+    public MRegisterResponse register(MAdminRegisterRequest request) throws AdminException {
 
         Admin admin = adminService.create(request.getDate(), request.getTime(), request.getUsername(), request.getPassword(), request.getType_admin());
 
@@ -89,7 +89,6 @@ public class AdminBusinass {
 
         if (allAdmin.isEmpty()) {
             return null;
-//            throw AdminException.fetchAllAdmin();
         } else {
             return allAdmin;    //ส่งรายการไปให้ api
         }

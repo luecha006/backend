@@ -3,7 +3,7 @@ package com.project10.projectc10_backend.model;
 import lombok.Data;
 
 @Data
-public class MDelectAllRequest {
+public class MAdminDeleteRequest {
 
-    private String username;
+    public String username;
 }

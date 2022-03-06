@@ -23,7 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/admin/fetchAllAdmin",
             "/facemask/writemaskpattern",
             "/facemask/fetchAllMaskPattern",
-            "/facemask/selectWithMaskPattern"
+            "/facemask/selectWithMaskPattern",
+            "/facemask/selectHomePageDateCurrent"
     };
 
 

@@ -2,7 +2,7 @@ package com.project10.projectc10_backend.mapper;
 
 import com.project10.projectc10_backend.entity.Admin;
 import com.project10.projectc10_backend.model.MFetchAllResponse;
-import com.project10.projectc10_backend.model.MLoginResponse;
+import com.project10.projectc10_backend.model.MAdminLoginResponse;
 import com.project10.projectc10_backend.model.MRegisterResponse;
 import org.mapstruct.Mapper;
 
@@ -13,7 +13,7 @@ public interface AdminMapper {
     //โดยที่เจาเอา file ที่คลายกันไป map ให้
     MRegisterResponse toMRegisterResponse(Admin admin);
 
-    MLoginResponse toMLoginResponse(Admin admin);
+    MAdminLoginResponse toMLoginResponse(Admin admin);
 
     MFetchAllResponse toMFetchAllResponse(Admin admin);
 }
