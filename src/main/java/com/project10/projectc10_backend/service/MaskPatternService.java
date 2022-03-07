@@ -91,9 +91,99 @@ public class MaskPatternService {
         return maskPatterns;
     }
 
-    public Iterable<HistoryScanner> selectHomePageDateCurrent(){
+    public Iterable<HistoryScanner> selectHomePageDateCurrent() {
         LocalDate currentDay = LocalDate.now();
         Iterable<HistoryScanner> maskPatterns = repository.selectHomePage(currentDay);
+        return maskPatterns;
+    }
+
+    public Iterable<HistoryScanner> selectSearchInformationPage(
+            String pattern,
+            LocalTime s_time,
+            LocalTime e_time,
+            LocalDate s_date,
+            LocalDate e_date,
+            float s_temperature,
+            float e_temperature) {
+
+        Iterable<HistoryScanner> maskPatterns = new HashSet<>();
+
+        if (pattern.equals("0")) {
+            if ((s_time == null && e_time == null) && (s_date == null && e_date == null) && (s_temperature == 0.0 && e_temperature == 0.0)) {
+                maskPatterns = repository.findAll();
+            } else if ((s_time != null && e_time != null) && (s_date != null && e_date != null) && (s_temperature != 0.0 && e_temperature != 0.0)) {
+                maskPatterns = repository.SearchInformationPageSelectAllAndPatternNull(
+                        s_time,
+                        e_time,
+                        s_date,
+                        e_date,
+                        s_temperature,
+                        e_temperature);
+            } else if ((s_time == null && e_time == null) && (s_date == null && e_date == null)) {
+                maskPatterns = repository.SearchInformationPageCaseNotPatternAndTemperatureOnly(s_temperature, e_temperature);
+            } else if ((s_time == null && e_time == null) && (s_temperature == 0.0 && e_temperature == 0.0)) {
+                maskPatterns = repository.SearchInformationPageCaseNotPatternAndDateOnly(s_date, e_date);
+            } else if ((s_date == null && e_date == null) && (s_temperature == 0.0 && e_temperature == 0.0)) {
+                maskPatterns = repository.SearchInformationPageCaseNotPatternAndTimeOnly(s_time, e_time);
+            } else if (s_time == null && e_time == null) {
+                maskPatterns = repository.SearchInformationPageCaseNotPatternAndTimeNull(s_date, e_date, s_temperature, e_temperature);
+            } else if (s_date == null && e_date == null) {
+                maskPatterns = repository.SearchInformationPageCaseNotPatternAndDateNull(s_time, e_time, s_temperature, e_temperature);
+            } else if (s_temperature == 0.0 && e_temperature == 0.0) {
+                maskPatterns = repository.SearchInformationPageCaseNotPatternAndTemperatureNull(s_time, e_time, s_date, e_date);
+            }
+
+        } else {
+            if ((s_time != null && e_time != null) && (s_date != null && e_date != null) && (s_temperature != 0.0 && e_temperature != 0.0)) {
+                maskPatterns = repository.SearchInformationPagePatternAllValue(
+                        pattern,
+                        s_time,
+                        e_time,
+                        s_date,
+                        e_date,
+                        s_temperature,
+                        e_temperature);
+            } else if ((s_time == null && e_time == null) && (s_date == null && e_date == null) && (s_temperature == 0.0 && e_temperature == 0.0)) {
+                maskPatterns = repository.SearchInformationPageCasePatternAllNull(pattern);
+            } else if ((s_date == null && e_date == null) && (s_temperature == 0.0 && e_temperature == 0.0)) {
+                maskPatterns = repository.SearchInformationPageCasePatternTimeOnly(pattern, s_time, e_time);
+            } else if ((s_time == null && e_time == null) && (s_temperature == 0.0 && e_temperature == 0.0)) {
+                maskPatterns = repository.SearchInformationPageCasePatternDateOnly(pattern, s_date, e_date);
+            } else if ((s_time == null && e_time == null) && (s_date == null && e_date == null)) {
+                maskPatterns = repository.SearchInformationPageCasePatternTemperatureOnly(pattern, s_temperature, e_temperature);
+            } else if (s_time == null && e_time == null) {
+                maskPatterns = repository.SearchInformationPageCasePatternTimeNull(
+                        pattern,
+                        s_date,
+                        e_date,
+                        s_temperature,
+                        e_temperature);
+            } else if (s_date == null && e_date == null) {
+                maskPatterns = repository.SearchInformationPageCasePatternDateNull(
+                        pattern,
+                        s_time,
+                        e_time,
+                        s_temperature,
+                        e_temperature);
+            } else if (s_temperature == 0.0 && e_temperature == 0.0) {
+                maskPatterns = repository.SearchInformationPageCasePatternTemperatureNull(
+                        pattern,
+                        s_time,
+                        e_time,
+                        s_date,
+                        e_date);
+            }
+        }
+
+        return maskPatterns;
+    }
+
+    public Iterable<HistoryScanner> ExportPage(String s_value, String e_value){
+        LocalDate s_date = convertDateTime.ConvertStringToLocalDate(s_value);
+        LocalDate e_date = convertDateTime.ConvertStringToLocalDate(e_value);
+
+        Iterable<HistoryScanner> maskPatterns = repository.ExportPage(s_date, e_date);
+
         return maskPatterns;
     }
 }

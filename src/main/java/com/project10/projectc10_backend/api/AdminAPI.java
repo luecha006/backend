@@ -19,11 +19,11 @@ class AdminAPI {
     }
 
     @PostMapping("/register") //function ลงทะเบียน ,add Admin --> ผ่าน
-    public ResponseEntity<MRegisterResponse> register(@RequestBody MAdminRegisterRequest request) throws AdminException {
+    public ResponseEntity<MAdminRegisterResponse> register(@RequestBody MAdminRegisterRequest request) throws AdminException {
         //ResponseEntity เป็นการห่อ object โดยถ้าการประมวลผลสำเร็จมันจะ return http กลับเป็น 200
         //ลงทะเบียนโดยมีข้อมูล โครงสร้างตาม Class MAdminRegisterRequest
 
-        MRegisterResponse response = businass.register(request);
+        MAdminRegisterResponse response = businass.register(request);
         return ResponseEntity.ok(response);
     }
 

@@ -24,7 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/facemask/writemaskpattern",
             "/facemask/fetchAllMaskPattern",
             "/facemask/selectWithMaskPattern",
-            "/facemask/selectHomePageDateCurrent"
+            "/facemask/selectHomePageDateCurrent",
+            "/facemask/selectSearchInformationPage",
+            "/facemask/ExportPage"
     };
 
 

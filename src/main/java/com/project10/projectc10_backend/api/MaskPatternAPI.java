@@ -4,9 +4,7 @@ import com.project10.projectc10_backend.businass.MaskPatternBusinass;
 import com.project10.projectc10_backend.entity.HistoryScanner;
 import com.project10.projectc10_backend.exception.BaseException;
 import com.project10.projectc10_backend.exception.MaskPatternException;
-import com.project10.projectc10_backend.model.MHomePageSelectMaskPatternRequest;
-import com.project10.projectc10_backend.model.MWriteMaskPatternRequest;
-import com.project10.projectc10_backend.model.MMaskPatternResponse;
+import com.project10.projectc10_backend.model.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,8 +46,14 @@ public class MaskPatternAPI {
     }
 
     @PostMapping
-    @RequestMapping("/selectHomePageMonthly")
-    public void selectSearchInformationPage(){
+    @RequestMapping("/selectSearchInformationPage")
+    public Iterable<HistoryScanner> selectSearchInformationPage(@RequestBody MSearchInformationMaskPatternRequest request){
+        return businass.selectSearchInformationPage(request);
+    }
 
+    @PostMapping
+    @RequestMapping("/ExportPage")
+    public Iterable<HistoryScanner> exportPage(@RequestBody MExportPatternRequest request){
+        return businass.ExportPage(request);
     }
 }

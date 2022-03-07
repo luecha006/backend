@@ -62,7 +62,7 @@ public class AdminBusinass {
 
     }
 
-    public MRegisterResponse register(MAdminRegisterRequest request) throws AdminException {
+    public MAdminRegisterResponse register(MAdminRegisterRequest request) throws AdminException {
 
         Admin admin = adminService.create(request.getDate(), request.getTime(), request.getUsername(), request.getPassword(), request.getType_admin());
 
