@@ -1,4 +1,4 @@
-package com.project10.projectc10_backend.api;
+package com.project10.projectc10_backend.controllers;
 
 import com.project10.projectc10_backend.businass.AdminBusinass;
 import com.project10.projectc10_backend.exception.AdminException;
@@ -52,5 +52,4 @@ class AdminAPI {
 
         return businass.fetchAll();
     }
-
 }

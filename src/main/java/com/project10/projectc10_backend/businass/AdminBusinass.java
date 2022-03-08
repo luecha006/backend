@@ -67,16 +67,6 @@ public class AdminBusinass {
         Admin admin = adminService.create(request.getDate(), request.getTime(), request.getUsername(), request.getPassword(), request.getType_admin());
 
         return adminMapper.toMRegisterResponse(admin);
-
-
-        // Objects.isNull(request.object) ฟังก์ชันสำหรับเช็คค่า null ของ object
-//        if (request == null) {
-//            throw UserException.requestNull();
-//        }
-//        if (Objects.isNull(request.getEmail())) {
-//            throw UserException.emailNull();
-//        }
-
     }
 
     public List<MFetchAllResponse> fetchAll() throws AdminException {
@@ -92,7 +82,6 @@ public class AdminBusinass {
         } else {
             return allAdmin;    //ส่งรายการไปให้ api
         }
-
     }
 
 }

@@ -21,12 +21,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/admin/changepassword",
             "/admin/delete",
             "/admin/fetchAllAdmin",
-            "/facemask/writemaskpattern",
+            "/facemask/savemaskpattern",
             "/facemask/fetchAllMaskPattern",
             "/facemask/selectWithMaskPattern",
             "/facemask/selectHomePageDateCurrent",
             "/facemask/selectSearchInformationPage",
-            "/facemask/ExportPage"
+            "/facemask/ExportPage",
+
+            "/temperature/save",
+            "/temperature/extract"
     };
 
 

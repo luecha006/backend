@@ -1,4 +1,4 @@
-package com.project10.projectc10_backend.api;
+package com.project10.projectc10_backend.controllers;
 
 import com.project10.projectc10_backend.businass.MaskPatternBusinass;
 import com.project10.projectc10_backend.entity.HistoryScanner;
@@ -19,7 +19,7 @@ public class MaskPatternAPI {
     }
 
     @PostMapping
-    @RequestMapping("/writemaskpattern")//บันทึกข้อมูบการสแกนลง database --> ผ่าน
+    @RequestMapping("/savemaskpattern")//บันทึกข้อมูบการสแกนลง database --> ผ่าน
     public ResponseEntity<MMaskPatternResponse> WriteMaskPattern(@RequestBody MWriteMaskPatternRequest request) throws BaseException {
 
         MMaskPatternResponse response = businass.WriteMaskPattern(request);

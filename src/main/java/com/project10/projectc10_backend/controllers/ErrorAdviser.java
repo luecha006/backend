@@ -1,4 +1,4 @@
-package com.project10.projectc10_backend.api;
+package com.project10.projectc10_backend.controllers;
 
 import com.project10.projectc10_backend.exception.BaseException;
 import lombok.Data;
