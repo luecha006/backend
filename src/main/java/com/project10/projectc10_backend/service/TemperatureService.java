@@ -33,12 +33,12 @@ public class TemperatureService {
         return entity.getTemperature();
     }
 
-    public float ExtractTemperature(){
+    public float ExtractTemperature() throws TemperatureException {
+        int count = repository.ExamineTemperature();
+        if(count < 1){
+            float f = SaveTemperature("auto create", 37.0F);
+        }
         float temperatures = repository.ExtractTemperature();
         return temperatures;
-    }
-
-    public int examineTemperature(){
-        return repository.ExamineTemperature();
     }
 }

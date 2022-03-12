@@ -31,8 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/facemask/ExportPage",
 
             "/temperature/save",
-            "/temperature/extract",
-            "/temperature/examinetemperature"
+            "/temperature/extract"
     };
 
 

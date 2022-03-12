@@ -17,11 +17,7 @@ public class TemperatureBusinass {
         return temperatureService.SaveTemperature(request.getAdmin_name(), request.getTemperature());
     }
 
-    public float ExtractTemperature(){
+    public float ExtractTemperature() throws TemperatureException {
         return temperatureService.ExtractTemperature();
-    }
-
-    public int examineTemperature(){
-        return temperatureService.examineTemperature();
     }
 }
