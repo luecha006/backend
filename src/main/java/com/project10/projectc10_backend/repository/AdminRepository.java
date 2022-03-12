@@ -1,6 +1,8 @@
 package com.project10.projectc10_backend.repository;
 
 import com.project10.projectc10_backend.entity.Admin;
+import com.project10.projectc10_backend.entity.HistoryScanner;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
@@ -14,4 +16,7 @@ public interface AdminRepository extends CrudRepository<Admin, Integer> {
     boolean existsByUsername(String username);
 
     Optional<Admin> deleteByUsername(String username);
+
+    @Query(value = "select COUNT(id) from admin_table ", nativeQuery = true)
+    int examineAdmin ();
 }

@@ -52,4 +52,9 @@ class AdminAPI {
 
         return businass.fetchAll();
     }
+
+    @GetMapping("/examineadmin")
+    public ResponseEntity<Integer> examineAdmin(){
+        return ResponseEntity.ok(businass.examineAdmin());
+    }
 }

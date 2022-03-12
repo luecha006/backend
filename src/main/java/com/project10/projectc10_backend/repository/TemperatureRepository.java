@@ -10,4 +10,7 @@ public interface TemperatureRepository extends CrudRepository<Temperature, Integ
 
     @Query(value = "select temperature from temperature order by id desc limit 1 ", nativeQuery = true)
     float ExtractTemperature();
+
+    @Query(value = "select count(id) from temperature", nativeQuery = true)
+    int ExamineTemperature();
 }

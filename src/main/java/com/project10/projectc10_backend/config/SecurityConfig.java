@@ -21,6 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/admin/changepassword",
             "/admin/delete",
             "/admin/fetchAllAdmin",
+            "/admin/examineadmin",
+
             "/facemask/savemaskpattern",
             "/facemask/fetchAllMaskPattern",
             "/facemask/selectWithMaskPattern",
@@ -29,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/facemask/ExportPage",
 
             "/temperature/save",
-            "/temperature/extract"
+            "/temperature/extract",
+            "/temperature/examinetemperature"
     };
 
 

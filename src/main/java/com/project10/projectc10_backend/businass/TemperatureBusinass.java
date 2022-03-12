@@ -20,4 +20,8 @@ public class TemperatureBusinass {
     public float ExtractTemperature(){
         return temperatureService.ExtractTemperature();
     }
+
+    public int examineTemperature(){
+        return temperatureService.examineTemperature();
+    }
 }

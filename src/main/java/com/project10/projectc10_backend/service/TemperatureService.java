@@ -37,4 +37,8 @@ public class TemperatureService {
         float temperatures = repository.ExtractTemperature();
         return temperatures;
     }
+
+    public int examineTemperature(){
+        return repository.ExamineTemperature();
+    }
 }

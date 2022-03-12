@@ -47,7 +47,7 @@ public class MaskPatternService {
 
     public List<HistoryScanner> fetchAllMaskPattern() {
         List<HistoryScanner> allPattern = new ArrayList<>();
-        Iterable<HistoryScanner> maskPatterns = repository.findAll();
+        Iterable<HistoryScanner> maskPatterns = repository.DisplayTablePageAngSearchInformationPageAllNull();
 
         for (HistoryScanner historyScanner : maskPatterns) {
             allPattern.add(historyScanner);
@@ -110,7 +110,7 @@ public class MaskPatternService {
 
         if (pattern.equals("0")) {
             if ((s_time == null && e_time == null) && (s_date == null && e_date == null) && (s_temperature == 0.0 && e_temperature == 0.0)) {
-                maskPatterns = repository.findAll();
+                maskPatterns = repository.DisplayTablePageAngSearchInformationPageAllNull();
             } else if ((s_time != null && e_time != null) && (s_date != null && e_date != null) && (s_temperature != 0.0 && e_temperature != 0.0)) {
                 maskPatterns = repository.SearchInformationPageSelectAllAndPatternNull(
                         s_time,

@@ -26,4 +26,9 @@ public class TemperatureAPI {
     public ResponseEntity<Float> ExtractTemperature(){
         return ResponseEntity.ok(businass.ExtractTemperature());
     }
+
+    @GetMapping("/examinetemperature")
+    public ResponseEntity<Integer> examineTemperature(){
+        return ResponseEntity.ok(businass.examineTemperature());
+    }
 }

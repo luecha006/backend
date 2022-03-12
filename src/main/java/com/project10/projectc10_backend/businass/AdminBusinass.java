@@ -84,4 +84,8 @@ public class AdminBusinass {
         }
     }
 
+
+    public int examineAdmin(){
+        return adminService.examineAdmin();
+    }
 }

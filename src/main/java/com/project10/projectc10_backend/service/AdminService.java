@@ -92,4 +92,8 @@ public class AdminService {
         }
         return allAdmin;
     }
+
+    public int examineAdmin(){
+        return repository.examineAdmin();
+    }
 }

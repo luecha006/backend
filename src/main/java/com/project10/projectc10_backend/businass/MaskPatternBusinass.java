@@ -38,26 +38,6 @@ public class MaskPatternBusinass {
     public Iterable<HistoryScanner> fetchAllMaskPattern() {
         return maskPatternService.fetchAllMaskPattern();
     }
-//--------------------------------
-//    public List<MFetchAllPatternResponse> selectWithMaskPattern(MHomePageSelectMaskPatternRequest pattern) {
-//        List<MFetchAllPatternResponse> allPattern = new ArrayList<>();
-//
-//        List<HistoryScanner> historyScanners = maskPatternService.selectWithMaskPattern(pattern.getE_time());
-//
-//        for (HistoryScanner h : historyScanners) { //ทำ mapping จาก Admin -> MFetchAllResponse
-//            allPattern.add((MFetchAllPatternResponse) maskMapper.toMFetchAllPatternResponse(h));
-//        }
-//
-////        System.out.println("allPattern businass "+allPattern);
-//
-//        if (historyScanners.isEmpty()) {
-//            return null;
-////            throw AdminException.fetchAllAdmin();
-//        } else {
-//            return allPattern;    //ส่งรายการไปให้ api
-//        }
-//    }
-
 
     // ไม่ทำการ mapper ส่งค่าเป็น historyscanner กลับเลย
     public Iterable<HistoryScanner> selectWithMaskPattern(MHomePageSelectMaskPatternRequest request) throws MaskPatternException {
